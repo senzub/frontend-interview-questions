@@ -15,12 +15,12 @@ It is a legacy effect from days when main browsers were netscape and internet ex
 
 Similar to a title in an article, giving reader a set of expectations
 
-Provides browser with set of expectations on how to interpret code
+#### Provides browser with set of expectations on how to interpret code
 
 ex: 
 
-HTML5 uses <!doctype html>
-HTML4 uses <!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.01//EN” “http://www.w3.org/TR/html4/strict.dtd”> 
+#### HTML5 uses <!doctype html>
+#### HTML4 uses <!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.01//EN” “http://www.w3.org/TR/html4/strict.dtd”> 
 
 
 if browser recognizes doctype declaration, it will trigger no-quirks mode, with proper method to read document
@@ -65,7 +65,7 @@ templating languages/engine
 
 What are HTML templating languages?
 
-A type of language that allows combining of data with own syntax/template/variables to produce HTML
+#### A type of language that allows combining of data with own syntax/template/variables to produce HTML
 
 Hello {{name}} => in rendering Hello bob, or Hello Karen
 
