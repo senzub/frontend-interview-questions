@@ -3,7 +3,7 @@
 ## TOC
 
 - [IIFE](#IIFE)
-
+- [scope](#scope)
 
 
 Yangshun - 109 questions
@@ -148,7 +148,7 @@ https://news.codecademy.com/your-guide-to-semicolons-in-javascript/
 https://stackoverflow.com/questions/46716006/what-is-the-order-of-execution-in-a-javascript-for-loop
 
 
-
+<a name="function"></a>
 ### Functions
 
 
@@ -176,8 +176,82 @@ no return  -  console.log();   returns undefined
 f returned - reusable, 
 
 
-<a name="IIFE"></a>
+#### Function Formats
 
+  1. function 
+     function x() {console.log('rethr')}
+
+  2. function expression
+     var x = function() {console.log('rethr')}
+
+  3. named function expression
+
+     var x = function y() {console.log('rethr')}
+  4. IIFE
+
+     (function(){console.log('rethr')})()
+
+  5. named IIFE
+     (function y(){console.log('rethr')})()
+
+Only the name of function declaration is remembered
+
+Rest is thrown out, not accessible
+1:4
+
+
+#### Uses:
+
+  1. Reuse blocks of code, refactor, DRY
+  2. Wrap code to ["hide it"](#hiding)
+
+
+
+<a name="hiding"></a>
+### Hiding using Scope
+
+Scope allows programmer to hide and minimally expose code
+
+
+
+
+Tools:
+1. function wrapping, to create closure
+   
+   Wrapping with all 4 others:
+   IIFE, named IIFE
+   FE, named FE
+
+   function level scoping
+
+2. objects: storing functions in objects
+3. Block-level scoping
+
+   let is like var, but block-scoped, and NOT hoisted
+
+   ex: if() { let x = 5} console.log(x)  //Reference Error
+    
+   console.log(bar) reference error
+   let bar = 5;
+
+   even place in arbitary block, it will bind
+
+   
+
+   const - block-scoped, 
+
+<a name="hidingvsclosure"></a>
+### Hiding vs Closure
+
+1. Hiding - has to do with protecting from global scope, creating own scope
+   Principle of Least Exposure - only show/make global minimum necessary, hide all else by wrapping it
+   POLE
+
+2. Closure - has to do with mobility, ability of function to access/reference its original scope when called outside its own originally declared scope
+
+
+
+<a name="IIFE"></a>
 ### IIFE - immediately invoked functions
 
 **Think of IIFE as f(), in one statement**
@@ -193,6 +267,9 @@ IIFE == f define then f();
 
 	function(){}() not allowed, as parser sees function(){} as declaration, not expression to be invoked
 
+
+   1. named
+   2. unnamed
 
 
 #### Putting IIFE in var
@@ -228,13 +305,89 @@ normal f - return f value
 iife - returns what f returns
 
 
-
+<a name="scope"></a>
 ### Scope
 
 
+#### Definition of Scope
+- Set of access of variables
+- Set of rules that determine access to variables, or how variables are 
+  - found
+  - stored
+  - accessed later
+- Also more than one scope
+  - global scope
+  - function scope
+  - block scope
+  - nested scope
+
+- Two types of declarations: 
+  1. function
+  2. variable
+
+    Variable is split into 
+    LHS - var a;
+    RHS - a = 2;
+	LHS statement
+	LHS lookup
+
+	LHS - not necessarily left, but look for container/variable to assign
+	look up, assign
+	implicit parameter assignment
+	a = 2, LHS
+
+	RHS - not necessarily right, but look upvalue
+	calling function, var, 
+	foo(), foo is RHS
+
+1. When encountering JS declaration, functions are collected
+  variable declarations split in two, first part collected
+
+  var a = 2;     =>    var a;
+2. If this variable already exists, skip
+3. If dne, create new
+4. Then later, when encounter a=2; look for variable a
+5. If yes, use
+6. If no, 
+7. If none at all, error
+
+RHS lookup, lookup value
+console.log(a);
+
+
+- JS Engine looks for closest declared variable, from innermost scope to outermost. If variable does not have declaration, it is made global
+
+  The search is stopped once engine finds variable, hence why value of a variable if the innermost value available
+
+  JS engine sees variable declaration as two separate statements
+  ex: var a = 2; =>   var a; and a = 2;
+
+
+  **ALL** declarations, the var a;, function declaration are executed FIRST before the rest of code. This behavior is called "hoisting" because it is similar to pulling the declarations or hoisting it to the top of code
+
+
+
+<a name="hoisting"></a>
 ### Hoisting
 
+- Two types of declarations: 
+  1. function
+  2. variable
 
+
+- Hoisting is behavior of JS engine to execute all declaration portions of statements before any other code is executed
+
+all function and variable declarations
+
+
+
+<a name="varletconst"></a>
+### Var vs Let vs Const
+
+
+
+
+<a name="closure"></a>
 ### Closure - think of as saving context with variables, like saving global context, but instead a function's local scope and context with its variables, allowing saving and incrementing
 
 #### **simple** 
@@ -248,7 +401,9 @@ ex: closure over inner scope of f1, access to scope of f1
 
 3. when function called outside its originally declared context/own scope, brings along its saved scope
 
-**Called outside originally declared**
+
+
+**Called outside originally declared scope, has reference to scope**
 
 #### Examples
 we see closure whenever
