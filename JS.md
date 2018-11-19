@@ -1,5 +1,11 @@
 # JS Questions
 
+## TOC
+
+- [IIFE](#IIFE)
+
+
+
 Yangshun - 109 questions
 
 1. 
@@ -170,6 +176,7 @@ no return  -  console.log();   returns undefined
 f returned - reusable, 
 
 
+<a name="IIFE"></a>
 
 ### IIFE - immediately invoked functions
 
@@ -221,7 +228,58 @@ normal f - return f value
 iife - returns what f returns
 
 
+
+### Scope
+
+
+### Hoisting
+
+
 ### Closure - think of as saving context with variables, like saving global context, but instead a function's local scope and context with its variables, allowing saving and incrementing
+
+#### **simple** 
+1. function 
+2. and access to its saved reference scope/variables from where it was originally declared, like a backpack of scope that it always brings when called outside declared context
+
+closure over == access to its scope
+ex: closure over inner scope of f1, access to scope of f1
+**function**
+**Access to scope where originally declared**
+
+3. when function called outside its originally declared context/own scope, brings along its saved scope
+
+**Called outside originally declared**
+
+#### Examples
+we see closure whenever
+- inner function called outside its declared are
+  2/5 combo below
+
+- setInterval also has closure, because keeps scope alive from original declared, due to inner f
+  f1
+    setInterval f2
+- setTimeout also has closure, saves scope, due to inner f
+  f1
+    setTimeout f2
+
+	for (var i=1; i<=5; i++) {
+		(function(j){
+			setTimeout( function timer(){
+				console.log( j );
+			}, j*1000 );
+		})( i );
+	}
+- function passed into another function, also shows closure by bringing scope
+- any asynchronous function
+- ajax
+- event handlers, 
+
+- f in global scope is not considered closure because not called out of its originally declared context
+
+scope backpack/variables, etc
+function 						=>	   closure
+
+
 
 #### inner function in saved context, retains access to its parent's variables, even though parental scope is gone/closed, such as in parental IIFE
 
@@ -238,16 +296,17 @@ demonstrating closure involves executing inner f/f2
 
 
 1. outer f - f or IIFE
-
-2. inner f - f(), IIFE (good for one time, setTimeout) /// return f (good for counter)
-
+  2
+2. inner f - f(), IIFE (good for one time, setTimeout), return f (good for counter), setTimeout, setInterval
+  
+  5
 return f, allows reuse, such as timer
 
 or f(), which just executes and cant access, but good for settimeout
 
 
 #### Examples:
- 
+
 a. Outer IIFE, inner return f
 
 var add = (function () {
@@ -290,7 +349,7 @@ x();
 // the counter is now 3
 
 
-
+### this
 
 
 ### setTimeout and setInterval
@@ -325,3 +384,49 @@ counter();
 
 
 sto sto closure, vs just executing in time interval
+
+
+
+
+
+
+
+
+
+### Array
+
+#### Add to front
+
+- array.unshift()
+
+- [x, ...array]
+
+#### Add to end
+
+- array.push()
+
+- [...array, x]
+
+### Typeof
+
+
+typeof 1
+
+typeof typeof 1 
+
+#### Result - is a string
+- "Number" - string
+
+
+
+
+
+
+
+
+
+
+
+### types and Abstract (==) vs Strict (===) equality operators
+
+
