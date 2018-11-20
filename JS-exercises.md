@@ -149,20 +149,29 @@ sto1, sto2  -- 100ms -- >    c.l1, c.l2 all together
 
 Easy way -- setInterval, and update
 
-function counter() {
-	var count = 0;
-	setInterval(() => {
-		console.log(count);
-		count+=2;
-	}, 200)
-}
 
-counter();
+closure and hide count, setInterval keeps var alive, and updates
+
+1. 
+(function counter() {
+	var count = 0;
+	var timer = setInterval(() => {
+		console.log(count);
+
+		if (count == 10) {
+			clearInterval(timer);
+		}		
+		count++;
+	}, 200)
+})();
 
 
 
 Hard way -- *no* setInterval, use setTimeout
 
+
+
+This does NOT work because it resets the var. we must wrap/hide in function to save variable while calling setTimeout
 function counter() {
 	var count = 0;
 
@@ -175,6 +184,10 @@ function counter() {
 
 counter();
 
+This works
+
+1. recursive setTimeout, time difference 1000
+
 function shama() {
 	var iter = 0;
 	function counter() {
@@ -186,58 +199,30 @@ function shama() {
 }
 shama();
 
+2. for loop, need time difference i*1000
 
-closure forms
+for (let i=0; i <= 10; i++) {
+	setTimeout((i) => {
+		console.log(i);
+    }, i*1000, i)
 
-demonstrating closure involves executing inner f/f2
-
-
-1. outer - f or IIFE
-
-2. inner - f(), IIFE (good for one time, setTimeout) /// return f (good for counter)
-
-return f, allows reuse, such as timer
-
-or f(), which just executes and cant access, but good for settimeout
-
-
-#### Examples:
- 
-a. Outer IIFE, inner return f
-
-var add = (function () {
-    var counter = 0;
-    return function () {counter += 1; return counter}
-})();
-
-add();
-add();
-add();
-
-// the counter is now 3
-
-b. Outer IFFE, inner IFFE
-
-(function() {
-	var count = 0;
-	(function foo() {
-		console.log(count);
-		count++;
-		setTimeout(foo, 200)
-	})()
-})()
-
-c. Outer f, inner return f
-
-function add() {
-    var counter = 0;
-    return function () {counter += 1; return counter}
 }
 
-var x = add();
+for (var i=0; i <= 10; i++) {
+	setTimeout((i) => {
+		console.log(i);
+    }, i*1000, i)
 
-x();
-x();
-x();
+}
 
-// the counter is now 3
+var becomes global, let is scoped to for loop
+
+
+   Two key problems:
+   - i*1000, the timing can't be simply 1000, because all the setTimeouts    will be executed after 1000 seconds
+   i.e The difference between setTimeouts must be 1000 seconds, but now the difference will be the time to execute one iteration, which is <10ms
+   - Saving the i value, so that it is proper number. If execute now, and i is not saved, we get i = maximum or minimum because all iterations have been executed
+
+
+
+

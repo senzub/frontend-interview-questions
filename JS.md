@@ -510,6 +510,30 @@ x();
 ### setTimeout and setInterval
 
 
+- setTimeout(f(parameter){}, delay, arg, arg)
+- setInterval(f(parameter){}, delay, arg, arg)
+
+- clearTimeout(id)  id is from variable, which is from when var x = setTimeout
+
+- clearInterval(id)  id is from variable, which is from when var x = setInterval  
+  
+  clearInterval **CAN** be called within the setInterval
+
+(function counter() {
+	var count = 0;
+	var timer = setInterval(() => {
+		console.log(count);
+	    if (count == 10) {
+			clearInterval(timer);
+		}		
+		count++;
+	}, 200)
+})()
+
+  https://stackoverflow.com/questions/16599878/can-clearinterval-be-called-inside-setinterval
+
+
+
 #### Similarities
 
 - Both do **NOT** execute on first zero seconds, but until **AFTER** first set of time
@@ -561,6 +585,8 @@ sto sto closure, vs just executing in time interval
 - array.push()
 
 - [...array, x]
+
+
 
 ### Typeof
 

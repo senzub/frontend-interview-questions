@@ -148,6 +148,73 @@ Pros:
 
 
 
+
+8. How to center div horizontally AND vertically
+
+need 3: 
+  - width
+    height
+  - position, absolute
+    top, bottom, right, left
+  - margin: auto;
+
+Think of this div wrapping centered div
+The center div wraps entire page
+inner div is pushed to middle of center div
+
+
+#center {
+	width: 10em;
+	height: 10em;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+
+9. How to center div ONLY vertically
+
+margin: auto 0; doesn't work
+
+need 3: 
+  - width
+    height
+  - position, absolute
+    top, bottom
+  - margin: auto;
+
+#center {
+	width: 10em;
+	height: 10em;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+}
+
+
+
+10. How to center div ONLY horizontally
+
+need 1:
+   - margin: 0 auto;
+
+#center {
+	
+	margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
 ### Summary
 
 Positioning properties
