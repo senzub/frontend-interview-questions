@@ -152,18 +152,18 @@ Easy way -- setInterval, and update
 
 closure and hide count, setInterval keeps var alive, and updates
 
-1. 
-(function counter() {
-	var count = 0;
-	var timer = setInterval(() => {
-		console.log(count);
+   1. 
+	(function counter() {
+		var count = 0;
+		var timer = setInterval(() => {
+			console.log(count);
 
-		if (count == 10) {
-			clearInterval(timer);
-		}		
-		count++;
-	}, 200)
-})();
+			if (count == 10) {
+				clearInterval(timer);
+			}		
+			count++;
+		}, 200)
+	})();
 
 
 
@@ -186,7 +186,7 @@ counter();
 
 This works
 
-1. recursive setTimeout, time difference 1000
+   1. recursive setTimeout, time difference 1000
 
 function shama() {
 	var iter = 0;
@@ -199,21 +199,21 @@ function shama() {
 }
 shama();
 
-2. for loop, need time difference i*1000
+	   2. for loop, need time difference i*1000
 
-for (let i=0; i <= 10; i++) {
-	setTimeout((i) => {
-		console.log(i);
-    }, i*1000, i)
+	for (let i=0; i <= 10; i++) {
+		setTimeout((i) => {
+			console.log(i);
+	    }, i*1000, i)
 
-}
+	}
 
-for (var i=0; i <= 10; i++) {
-	setTimeout((i) => {
-		console.log(i);
-    }, i*1000, i)
+	for (var i=0; i <= 10; i++) {
+		setTimeout((i) => {
+			console.log(i);
+	    }, i*1000, i)
 
-}
+	}
 
 var becomes global, let is scoped to for loop
 

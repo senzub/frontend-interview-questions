@@ -8,7 +8,104 @@
 
 Yangshun - 109 questions
 
-1. 
+
+0. Why is it, in general, a good idea to leave the global scope of a website as-is and never touch it?
+
+
+The global scope is shared by ALL js scripts running on site, and this shared namespace will cause conflict when different scripts have same names for variables
+
+
+
+solutions :  [hiding](#hiding), wrapping in function, block scoping, placing in objects, IIFE
+
+
+
+There is only ONE window/global object
+
+So while other objects       obj1 === obj1     			=> false
+
+window === window   				=> true
+
+
+1. What tools and techniques do you use for debugging JavaScript code?
+
+   1. Chrome devtools
+   2. debugger;
+   3. console.log()
+
+
+2. Explain the differences on the usage of foo between function foo() {} and var foo = function() {}
+
+
+The former is a function declaration while latter is function expression
+
+How do they differ? In hoisting behaviors. 
+
+Function declaration is hoisted completely, its body hoisted
+Function expression is hoisted like a variable, its body is left behind
+
+
+3. Explain how this works in JavaScript
+
+"this" is a reference to an object that is bound when a function is called and its binding object depends on the function's call-site, or the situation in which it is called
+
+
+#### Four rules for "this" binding/ for normal function declarations
+
+   1. new binding - new f();
+
+   2. explicit binding - f.call(obj), f.apply(obj), f.bind(obj)
+
+   3. object implicit binding - obj.f();
+
+
+   4. default binding   f();
+
+
+#### Arrow function "this" binding rules
+
+For arrow functions, () =>{}, different rules:
+
+   1. Look for parental scope, enclosing scope. If it is ()=>{}, keep looking up until find function(){}. 
+
+   If none, then it will be global scope
+
+   Arrow functions inherit "this" binding from surrounding scope. Therefore, any parental ()=> also inherited, until function found. So we keep looking up
+
+   An arrow function ()=> in global gets global "this" binding
+
+
+
+
+4. What's the difference between .call and .apply?
+
+Both are functions designed to change the "this" binding of a function and invoke it at same time
+
+   - bind "this"
+   - call
+
+   Differences:
+
+   - C/Call - enter arguments are "comma-separated"
+   - A/Apply - enter arguments as "array"
+
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add.call(null, 1, 2)); // 3
+console.log(add.apply(null, [1, 2])); // 3
+
+
+
+5. Explain Function.prototype.bind.
+
+It is a method that takes an object and a function and returns a copy of funtion with its "this" keyword bound to the given object
+
+   - function.bind(this);
+
+
+
 
 
 ## Summary
@@ -205,49 +302,52 @@ Rest is thrown out, not accessible
   1. Reuse blocks of code, refactor, DRY
   2. Wrap code to ["hide it"](#hiding)
 
+<a name="fdeclarationfexpression"></a>
+### Function Declaration vs Function Expression
+
+Function Declaration:
+
+function foo() {}
 
 
-<a name="hiding"></a>
-### Hiding using Scope
+Function Expression: 
 
-Scope allows programmer to hide and minimally expose code
-
+var foo = function(){}
 
 
 
-Tools:
-1. function wrapping, to create closure
-   
-   Wrapping with all 4 others:
-   IIFE, named IIFE
-   FE, named FE
+Main difference: hoisting behavior
 
-   function level scoping
+Function declaration's full body is hoisted
 
-2. objects: storing functions in objects
-3. Block-level scoping
+Function expression is hoisted like variable, body left behind, assigned later
 
-   let is like var, but block-scoped, and NOT hoisted
 
-   ex: if() { let x = 5} console.log(x)  //Reference Error
-    
-   console.log(bar) reference error
-   let bar = 5;
 
-   even place in arbitary block, it will bind
+<a name="arrowfn"></a>
+### Arrow Functions - ()=>{}, new function syntax and "this binding"
 
-   
+  - If NO parameter, ()=>{}, () necessary
+  - If ONE parameter, a =>{}, () unnecessary
+  - If >ONE parameter, (a,b)=>{} () necessary
 
-   const - block-scoped, 
+  - implict one line return
+    ()=> 5
 
-<a name="hidingvsclosure"></a>
-### Hiding vs Closure
+  - explicit return, or more than one line
 
-1. Hiding - has to do with protecting from global scope, creating own scope
-   Principle of Least Exposure - only show/make global minimum necessary, hide all else by wrapping it
-   POLE
+    () => {return 5}
 
-2. Closure - has to do with mobility, ability of function to access/reference its original scope when called outside its own originally declared scope
+    () => {
+		console.log(5);
+		return 5;
+	}
+
+	()=>return 5;    =>  error
+
+  - Different "this binding", look for enclosing function(){}s
+
+
 
 
 
@@ -303,6 +403,51 @@ i.e.  IIFE is just one step ahead of f, f().
 
 normal f - return f value
 iife - returns what f returns
+
+
+
+<a name="hiding"></a>
+### Hiding using Scope
+
+Scope allows programmer to hide and minimally expose code
+
+
+
+
+Tools:
+1. function wrapping, to create closure
+   
+   Wrapping with all 4 others:
+   IIFE, named IIFE
+   FE, named FE
+
+   function level scoping
+
+2. objects: storing functions in objects
+3. Block-level scoping
+
+   let is like var, but block-scoped, and NOT hoisted
+
+   ex: if() { let x = 5} console.log(x)  //Reference Error
+    
+   console.log(bar) reference error
+   let bar = 5;
+
+   even place in arbitary block, it will bind
+
+   
+
+   const - block-scoped, 
+
+<a name="hidingvsclosure"></a>
+### Hiding vs Closure
+
+1. Hiding - has to do with protecting from global scope, creating own scope
+   Principle of Least Exposure - only show/make global minimum necessary, hide all else by wrapping it
+   POLE
+
+2. Closure - has to do with mobility, ability of function to access/reference its original scope when called outside its own originally declared scope
+
 
 
 <a name="scope"></a>
@@ -379,10 +524,70 @@ console.log(a);
 
 all function and variable declarations
 
+#### Hoisting precedence
 
+   1. functions are hoisted before var
+      
+      function foo
+
+      var foo;     ->   ignored
+   2. If more than one function with same name, **Latest** function is assigned
+
+   ex: function foo(){console.log(5);}
+
+   function foo(){console.log(10);}
+
+   foo();       ->    10
 
 <a name="varletconst"></a>
 ### Var vs Let vs Const
+
+let and const are new ES6, variable declarations
+
+Differences:     var vs (let and const)
+
+   1. var is function scoped         let/const are block scoped (meaning they are scoped/accessible only within {} closest block)
+      
+      blocks include:
+      - {}, arbitrary blocks
+      - functions 
+      - for loops
+      - if else
+      - try catch
+      - with
+
+   2. var is hoisted                 let/const not hoisted, give refernce error
+
+
+   3. var can be declared many times
+      var x, var x, no error
+
+      let/const can be declared only once
+	  let x = 5;
+	  let x   =>  error
+
+
+   4.   This differnce is   let vs const
+
+       Both can only be declared once
+
+
+       But let can be reassigned
+
+       const can only be assigned once
+
+
+       let x = 5;
+       x = 7;
+
+
+       const z = 7;
+       z = 9   => error
+
+       but not immutable:   const z = []; z.push(5); //[5]
+
+
+
 
 
 
