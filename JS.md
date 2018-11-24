@@ -334,6 +334,10 @@ Function expression is hoisted like variable, body left behind, assigned later
   - implict one line return
     ()=> 5
 
+    implicit OBJECT return
+
+    ()=> ({a:1}), wrap object in parentheses
+
   - explicit return, or more than one line
 
     () => {return 5}
