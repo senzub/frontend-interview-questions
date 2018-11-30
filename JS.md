@@ -272,6 +272,48 @@ no return  -  console.log();   returns undefined
 
 f returned - reusable, 
 
+   
+  1. return value;
+     return function() {};
+     return console.log;
+
+
+  2. return f();       returns the returned value of function
+	 
+	 return console.log('');
+
+
+	 console.log() returns nothing, so return console.log();
+
+	 returns undefined
+
+
+	 it is useless
+
+
+  3. return;
+
+     no return specified 
+
+     so undefined return
+
+
+  4. No return defined at all
+
+
+     returns undefined 
+
+     ex:   var x = new Person();    returns object
+
+
+      however,    var x = Person();  calls, but no defined return
+
+
+      therefore, x == undefined
+
+
+
+
 
 #### Function Formats
 
@@ -516,12 +558,21 @@ console.log(a);
 
 
 
+
+
+
 <a name="hoisting"></a>
 ### Hoisting
 
 - Two types of declarations: 
   1. function
-  2. variable
+  2. variable, declared variables only
+
+     undeclared variables are NOT hoisted, such as in assignment
+
+
+     a = 5; becomes global, declared, but not hoisted
+
 
 
 - Hoisting is behavior of JS engine to execute all declaration portions of statements before any other code is executed
@@ -542,6 +593,88 @@ all function and variable declarations
    function foo(){console.log(10);}
 
    foo();       ->    10
+
+
+
+<a name="types"></a>
+### Types
+
+#### Seven Types
+
+
+  1. Symbol - new ES6
+  2. Number
+  3. Object
+	
+	Object Subtypes
+
+
+    functions
+    arrays
+    built-in constructors
+
+  4. String
+  5. null
+  6. undefined
+  7. Boolean
+
+
+<a name="typeof"></a>
+### Typeof
+
+typeof is way to check type of value
+
+
+#### Seven possible Answers  -- These do NOT correspond exactly to the seven listed types
+
+  - All the answers are lowercase
+  - Strings
+
+    so typeof typeof anythign    --   always "string"
+
+  - typeof undeclared variable == "undefined"
+
+    can be used to check for undeclared variables
+
+   1. "symbol"
+   2. "number"
+
+      NaN becomes part of type "number"
+
+   3. "boolean"
+   4. "string"
+   5. "undefined"
+   6. "function"
+
+      function is removed from object and becomes its own type
+   7. "object"
+
+      null, array, objects all go under object
+
+
+
+
+<a name="var"></a>
+### Variables
+
+
+   1. Declared variables
+
+
+
+   2. Undeclared variables 
+
+      NOT hoisted
+
+
+      To check,   var, gives reference error
+
+
+      To check if undeclared var,
+
+
+      typeof undecl == "undefined"
+
 
 <a name="varletconst"></a>
 ### Var vs Let vs Const
