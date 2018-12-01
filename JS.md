@@ -245,8 +245,8 @@ https://news.codecademy.com/your-guide-to-semicolons-in-javascript/
 https://stackoverflow.com/questions/46716006/what-is-the-order-of-execution-in-a-javascript-for-loop
 
 
-<a name="function"></a>
-### Functions
+<a name="types"></a>
+### Types
 
 
 #### Value
@@ -312,7 +312,10 @@ f returned - reusable,
       therefore, x == undefined
 
 
+	** Two Examples **
 
+	1. var x = Constructor();    no new binding, so undefined
+	2. return console.log();    prints out only, no return
 
 
 #### Function Formats
@@ -930,21 +933,109 @@ sto sto closure, vs just executing in time interval
 
 
 
-### Typeof
-
-
-typeof 1
-
-typeof typeof 1 
-
-#### Result - is a string
-- "Number" - string
 
 
 
+<a name="usestrict"></a>
+### Use Strict/Strict Mode,    "use strict"
 
 
 
+<a name="asyncsync"></a>
+### Asynchronous vs Synchronous Code
+
+#### Asynchronous code: 
+  1. Non Blocking
+  2. Executed out of order of program
+  3. Does not wait, while being processed, other code/parts of program is allowed to run
+
+  Asynchronous is LATER code
+
+
+#### Synchronous code: 
+  1. Blocking
+  2. Executed in order of program
+  3. Wait until completion to execute next step. So if a part of code takes long time, it blocks the entire program. ex: alert function
+
+
+
+<a name="eventloop"></a>
+### Event Loop
+
+
+
+
+
+<a name="cbcallback"></a>
+### Callbacks/cb
+
+#### Two definitions
+
+
+  1. Function that is run asynchronously, run after some gap of time
+  2. A function that is generally passed into another function
+
+
+
+<a name="promise"></a>
+### Promises
+
+  Promises are OBJECTS, so typeof  == "object"
+
+  These objects represent promises of future values
+
+
+  They have Three states:
+
+  1. pending
+
+
+    After pending, promise is said to be 
+
+    "resolved"
+
+    There are Two "resolved" states: 
+
+  2. fulfilled
+    Like promise fulfilled
+
+  3. rejected
+
+
+   Ex: order of cheeseburger
+
+
+   later, get cheeseburger (fulfilled)
+
+   or later, get nothing (rejected)
+
+
+
+<a name="cbcallbackvspromise"></a>
+### Callbacks vs Promises
+
+#### Callbacks are what were primarily used for two decades before promises came into picture
+   
+   Problems:
+
+   1. Callback hell
+      
+      Nested callbacks prevented easy reading, hard to manage code
+
+      Lack of readability
+
+   2. Lack of readability, not sequential
+
+       The callbacks nested prevented from easy reading 
+
+
+#### Promises:
+   
+  1. Solved problem of nesting, by creating chainable
+
+  "then" functions
+
+  2. Read async code like sequential code using "then"
 
 
 
