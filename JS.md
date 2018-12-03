@@ -963,7 +963,11 @@ sto sto closure, vs just executing in time interval
 ### Event Loop
 
 
+single threaded loop
+monitors call stack and task queue/callback queue
+if call stack empty, task queue not empty
 
+push from task queue to call stack, execute
 
 
 <a name="cbcallback"></a>
@@ -1042,5 +1046,61 @@ sto sto closure, vs just executing in time interval
 
 
 ### types and Abstract (==) vs Strict (===) equality operators
+
+
+
+<a name="operators"></a>
+### Operators
+
+1. +
+2. - 
+3. *
+4. /
+5. % - modulus operator      --     results in **INTEGER**
+  
+  It takes the remainder of the number
+  NOT the decimal value
+
+  
+  15%7   1 NOT 1/7
+
+  To get just decimal
+  1. can String(number) then get second part
+  2. Get % number   then divide by denominator to get fraction
+
+  
+  **watch out!!!**
+
+  for 0, because modulus operator returns 0 for 0%0
+
+6. ++
+
+   Two Forms:
+
+  1. x++
+
+    This returns the x, and increments after, so
+    x = 5;
+    var y = x++
+
+    x now 6,
+    y is 5, because returned BEFORE incremented
+
+
+  2. ++x
+
+    This increments THEN returns x, so
+    x = 5;
+    var y = ++x
+
+    x now 6,
+    y is also 6, because incremented BEFORE returned
+
+
+7. --
+   
+   Same as ++, but with subtraction
+
+8. +=
 
 
