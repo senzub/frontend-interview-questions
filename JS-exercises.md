@@ -226,3 +226,110 @@ var becomes global, let is scoped to for loop
 
 
 
+
+### TopTal Questions
+
+https://www.toptal.com/javascript/interview-questions
+
+1. What will the following code output to the console:
+
+console.log((function f(n){return ((n > 1) ? n * f(n-1) : n)})(10));
+Explain your answer.
+
+
+
+2. Consider the code snippet below. What will the console output be and why?
+
+(function(x) {
+    return (function(y) {
+        console.log(x);
+    })(2)
+})(1);
+
+
+
+3. Create a function that, given a DOM Element on the page, will visit the element itself and all of its descendents (not just its immediate children). For each element visited, the function should pass that element to a provided callback function.
+
+The arguments to the function should be:
+
+a DOM element
+a callback function (that takes a DOM element as its argument)
+
+
+
+4. What will be the output of this code?
+
+var x = 21;
+var girl = function () {
+    console.log(x);
+    var x = 20;
+};
+girl ();
+
+
+5. for (let i = 0; i < 5; i++) {
+  setTimeout(function() { console.log(i); }, i * 1000 );
+}
+What will this code print?
+
+
+6. What will be the output of the following code:
+
+for (var i = 0; i < 5; i++) {
+	setTimeout(function() { console.log(i); }, i * 1000 );
+}
+Explain your answer. How could the use of closures help here?
+
+
+
+7. The following recursive code will cause a stack overflow if the array list is too large. How can you fix this and still retain the recursive pattern?
+
+var list = readHugeList();
+
+var nextListItem = function() {
+    var item = list.pop();
+
+    if (item) {
+        // process the list item...
+        nextListItem();
+    }
+};
+
+
+8. What will the code below output to the console and why?
+
+var arr1 = "john".split('');
+var arr2 = arr1.reverse();
+var arr3 = "jones".split('');
+arr2.push(arr3);
+console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1));
+console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1));
+
+
+
+9. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
+
+10. What is the output out of the following code? Explain your answer.
+
+var a={},
+    b={key:'b'},
+    c={key:'c'};
+
+a[b]=123;
+a[c]=456;
+
+console.log(a[b]);
+
+
+
+11. (function() {
+    console.log(1); 
+    setTimeout(function(){console.log(2)}, 1000); 
+    setTimeout(function(){console.log(3)}, 0); 
+    console.log(4);
+})();
+
+
+
+
+last 3

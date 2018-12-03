@@ -245,13 +245,32 @@ https://news.codecademy.com/your-guide-to-semicolons-in-javascript/
 https://stackoverflow.com/questions/46716006/what-is-the-order-of-execution-in-a-javascript-for-loop
 
 
-<a name="types"></a>
-### Types
 
+
+<a name="dom"></a>
+### DOM  --   Document Object Model
+
+
+
+
+
+
+<a name="functions"></a>
+### Functions
+
+
+  1. Value
+  2. parameters
+  3. Return
 
 #### Value
 
 functions are a value
+
+typeof function == "function"
+
+But it is a subtype of object
+
 
 can be returned
 
@@ -263,6 +282,52 @@ f()
 Then we can save f value and **reuse** it
 
 Like counter closure
+
+
+
+
+#### Parameters
+
+Parameters are the variables that functions bind when receive input
+
+f(a,b)
+
+and invoked  f(x,y)
+
+
+function saves variables
+
+
+var a = x;
+var b = y;
+
+**implicitly**
+
+
+So this inludes in closures
+
+var z = 1;
+var q = (function bob(a) {
+
+  return function() {
+    return a;
+
+  }
+(z))
+
+
+
+z = 7;
+
+var w = q();
+
+// w == 1;
+// so implicit var a = z == 1;
+// Saved 1, so even if outer z is now 7, still 1
+
+
+
+
 
 #### Return
 
