@@ -720,6 +720,40 @@ typeof is way to check type of value
       null, array, objects all go under object
 
 
+#### How to check type using typeof for special cases?
+
+1. NaN
+  
+  isNaN()  ->   problem is it gives true for anything not a number, 
+  [], '', etc
+
+
+  so isNaN(NaN) && NaN !== NaN should give true for NaNs
+
+2. Array
+  
+  Problem is array, objects both gives typeof == "object"
+
+  so, need
+
+
+  typeof [] == "object" && [].constructor == Array
+
+3. Object
+
+  typeof {} == "object" && {}.constructor == Object
+
+
+  
+  each object has constructor property in its prototype, which points to the Native objects
+
+
+
+typeof to check
+1. special cases
+2. undeclared variables
+   ex: typeof NULL == "undefined"
+
 
 
 <a name="var"></a>
@@ -1167,5 +1201,119 @@ push from task queue to call stack, execute
    Same as ++, but with subtraction
 
 8. +=
+
+<a name="orderofoperations"></a>
+### Order of Operations
+
+
+1. From left to right, two at a time
+  
+  5+"2" + 'wow';
+
+  5 + "2"  ->    "52"
+  "52" + "wow"   ->  "52wow"
+
+2. Unary before others
+
+  5+ +"3q"     ->   5 + NaN ->  NaN
+
+
+
+3. var a = b = 5;
+
+   From right to left
+
+
+   b = 5;
+   var a = b;
+
+
+
+<a name="typecoercionconversion"></a>
+### Type Coercion or Type Conversion
+
+
+#### Boolean
+
+Operators: 
+
+1. !
+  !5, 5 -> true, !true -> false;
+
+2. if ()/else
+3. &&  ||, these implicitly coerce to compare, but RETURN ORIGINAL value
+
+  ex: 5 && 8,  5->true,  8->true, return **8**
+
+
+
+1. List of Falsey values
+  1. null
+  2. 0, -0
+  3. undefined
+  4. ""
+  5. NaN
+
+2. ALL other values are therefore Truthy
+
+  Includes ALL objects, such as [], {}
+
+  Negative numbers
+
+  !!-2  -> true;
+
+
+
+#### Number
+
+Operators: 
+
+1. +, only if ALL numbers
+2. 
+
+
+#### String
+
+Operators: 
+
+
+<a name="modulusoperator"></a>
+### Modulus Operator
+
+%   -  gives back remainder
+
+
+#### Can be used for Three main types of problems
+
+1. Check if Even
+  Even Numbers divided by 2, remainder is ALWAYS 0
+
+  n%2 == 0;
+
+
+2. Check if Odd
+  Odd Numbers divided by 2, remainder is ALWAYS 1
+
+  Math.abs(n%2) == 1;
+  
+  Because of negative even numbers
+
+
+3. Check if Integer
+  
+  n%1, is NOT n/1, which always gives back numerator
+
+
+  n%1 gives remainder, and if it is integer, get back 0
+
+  function isInteger(n) {
+    
+    return Math.abs(n%1) == 0;
+
+  }
+
+
+
+
 
 
