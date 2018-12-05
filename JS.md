@@ -1235,7 +1235,7 @@ push from task queue to call stack, execute
 
 #### Boolean
 
-Operators: 
+Operators: 3
 
 1. !
   !5, 5 -> true, !true -> false;
@@ -1247,35 +1247,119 @@ Operators:
 
 
 
-1. List of Falsey values
-  1. null
-  2. 0, -0
-  3. undefined
-  4. ""
-  5. NaN
+    1. List of Falsey values
+      1. null
+      2. 0, -0
+      3. undefined
+      4. ""
+      5. NaN
 
-2. ALL other values are therefore Truthy
+    2. ALL other values are therefore Truthy
 
-  Includes ALL objects, such as [], {}
+      Includes ALL objects, such as [], {}
 
-  Negative numbers
+      Negative numbers
 
-  !!-2  -> true;
+      !!-2  -> true;
 
 
 
 #### Number
 
-Operators: 
+Operators: 4
 
 1. +, only if ALL numbers
-2. 
+2. Unary operator, +/-
+3. -,/, multiply always coerce to numbers
+4. ==, coerce to number,
+
+  If any boolean, always coerce to number,
+  If any str, coerce to number
+
+  however, null not coerced to zero, only for ==
+  
+
+  So Number(null) =>   0
+  But null == 0;
+
+  false, b/c not coerced
+
 
 
 #### String
 
-Operators: 
+Operators: 1
 
+1. +, is default, if any strings, concatenate
+
+
+
+
+<a name="abstractequality"></a>
+### Abstract Equality   ==
+
+1. If differnt types, convert and compare values
+   Precedence:
+   If boolean, to nonboolean, to number
+    
+   If String, with number, convert to numer
+  
+
+  So  "5" == true;
+      "5" == 1;
+
+       5 == 1;  -> false
+
+
+<a name="strictequality"></a>
+### Strict Equality   ===
+
+1. NO conversion
+2. If different types, always false
+
+  ex: "0" === 0   -> false
+
+
+3. If same type, compare values
+4. If values same, true, else false
+
+
+
+
+<a name="eventdelegation"></a>
+### Event Delegation
+
+A technique in the DOM, where a single event handler is placed on parent as a delegate to receive and respond to event acted on child
+
+This works because event bubbling allows event to propagate/be experienced by parents up to dom
+
+
+ex:  ul
+       li
+
+   instead of placing multiple event handlers on li, place one on ul, to get e.target values
+
+
+
+<a name="eventpropagation"></a>
+### Event Propagation
+
+
+#### Two Types of Event propgation
+
+  These two types travel across SAME elements, just different directions
+
+  1. Event bubbling
+  
+  Event travels from target to document top
+
+  2. Event capturing
+
+  Event travels from document top to target
+
+
+
+  
 
 <a name="modulusoperator"></a>
 ### Modulus Operator

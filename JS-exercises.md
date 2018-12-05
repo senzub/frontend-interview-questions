@@ -236,7 +236,7 @@ https://www.toptal.com/javascript/interview-questions
 console.log((function f(n){return ((n > 1) ? n * f(n-1) : n)})(10));
 Explain your answer.
 
-
+#### Soln	
 
 2. Consider the code snippet below. What will the console output be and why?
 
@@ -246,7 +246,7 @@ Explain your answer.
     })(2)
 })(1);
 
-
+#### Soln
 
 3. Create a function that, given a DOM Element on the page, will visit the element itself and all of its descendents (not just its immediate children). For each element visited, the function should pass that element to a provided callback function.
 
@@ -255,6 +255,7 @@ The arguments to the function should be:
 a DOM element
 a callback function (that takes a DOM element as its argument)
 
+#### Soln
 
 
 4. What will be the output of this code?
@@ -266,12 +267,16 @@ var girl = function () {
 };
 girl ();
 
+#### Soln
+
 
 5. for (let i = 0; i < 5; i++) {
   setTimeout(function() { console.log(i); }, i * 1000 );
 }
 What will this code print?
 
+
+#### Soln
 
 6. What will be the output of the following code:
 
@@ -281,6 +286,7 @@ for (var i = 0; i < 5; i++) {
 Explain your answer. How could the use of closures help here?
 
 
+#### Soln
 
 7. The following recursive code will cause a stack overflow if the array list is too large. How can you fix this and still retain the recursive pattern?
 
@@ -295,6 +301,9 @@ var nextListItem = function() {
     }
 };
 
+#### Soln
+
+
 
 8. What will the code below output to the console and why?
 
@@ -305,9 +314,17 @@ arr2.push(arr3);
 console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1));
 console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1));
 
+#### Soln
+
+This is a test of mutable array methods
+
+
 
 
 9. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
+
+
+#### Soln
 
 10. What is the output out of the following code? Explain your answer.
 
@@ -320,16 +337,25 @@ a[c]=456;
 
 console.log(a[b]);
 
+#### Soln
 
+11. In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?
 
-11. (function() {
+(function() {
     console.log(1); 
     setTimeout(function(){console.log(2)}, 1000); 
     setTimeout(function(){console.log(3)}, 0); 
     console.log(4);
 })();
 
+#### Soln
 
+1
+4
+3
+2
 
+Because setTimeout, 0 is minimum time to execution, not guarantee, and callbackqueue, event loop will wait until call stack is clear, i.e. until after all the console.logs are finished
 
-last 3
+This leaves setTimeout 0 then setTimeout 1000
+
