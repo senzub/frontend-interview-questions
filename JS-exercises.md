@@ -359,3 +359,18 @@ Because setTimeout, 0 is minimum time to execution, not guarantee, and callbackq
 
 This leaves setTimeout 0 then setTimeout 1000
 
+
+12. Consider the following code. What will the output be, and why?
+
+(function () {
+    try {
+        throw new Error();
+    } catch (x) {
+        var x = 1, y = 2;
+        console.log(x);
+    }
+    console.log(x);
+    console.log(y);
+})();
+
+#### Soln

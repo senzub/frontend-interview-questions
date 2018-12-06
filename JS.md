@@ -251,6 +251,35 @@ https://stackoverflow.com/questions/46716006/what-is-the-order-of-execution-in-a
 ### DOM  --   Document Object Model
 
 
+It is the HTML converted to a javascript object by the browser
+
+#### Difference between "Attributes" and "Properties"
+
+HTML - Have Attributes on elements
+
+DOM - has Properties on objects
+
+They seem like same thing, but when accessed by javascript, attribute getAttribute gives inital/default
+
+properties give newest  
+
+
+
+const input = document.querySelector('input');
+console.log(input.getAttribute('value')); // Hello
+console.log(input.value); // Hello
+
+https://stackoverflow.com/questions/19246714/html-attributes-vs-properties
+
+https://stackoverflow.com/questions/258469/what-is-the-difference-between-attribute-and-property
+
+https://github.com/yangshun/front-end-interview-handbook/blob/master/questions/javascript-questions.md#whats-the-difference-between-an-attribute-and-a-property
+
+https://stackoverflow.com/questions/6003819/what-is-the-difference-between-properties-and-attributes-in-html
+
+
+
+
 
 
 
@@ -754,6 +783,87 @@ typeof to check
 2. undeclared variables
    ex: typeof NULL == "undefined"
 
+
+<a name="object"></a>
+### Objects
+
+
+#### Built-in Objects
+NH
+
+  1. Host Objects
+  
+  Objects provided by runtime environment, the browser or node
+
+
+  ex: window, document, setTimeout
+
+  2. Native Objects
+
+  Objects that are part of JS v8 engine, 
+
+  ALL constructor objects
+
+  Array, String
+
+  Math
+
+
+
+#### Check Properties
+
+
+  1. in, property in oject
+
+    true/false, but goes all the way up chain
+
+  2. Object.hasOwnProperty("prop");, only checks own object
+
+
+#### To loop through properties
+
+  1. for property  in object  
+
+   (for of loops don't work on objects)
+
+   https://stackoverflow.com/questions/29885220/using-objects-in-for-of-loops
+
+  2. best:   Object.keys(obj)  to get array of keys.
+
+
+
+
+
+
+
+<a name="ternaryoperator"></a>
+### Ternary Operator
+
+Means three, unary one, binary two
+
+
+Three operands, Two operators, shortcut if/else
+
+
+
+ Conditional ? True execute : False execute
+  
+
+#### Uses:
+
+
+  1. For assigning variable conditionally, used often in React
+
+
+  var x =  a ? b : c
+
+function greeting(person) {
+    var name = person ? person.name : "stranger";
+    return "Howdy, " + name;
+}
+
+console.log(greeting({name: 'Alice'}));  // "Howdy, Alice"
+console.log(greeting(null));             // "Howdy, stranger"​​​​​
 
 
 <a name="var"></a>
@@ -1359,7 +1469,7 @@ ex:  ul
 
 
 
-  
+
 
 <a name="modulusoperator"></a>
 ### Modulus Operator
@@ -1399,5 +1509,89 @@ ex:  ul
 
 
 
+
+
+
+
+<a name="ajax"></a>
+### AJAX - Asynchronous javascript and XML
+
+Techniques/technologies used to communicate with servers, fetch and update data
+techniques to asynchronously send data and get data from servers without interfering with user/background
+
+- communicate with server in background, get/update data
+- allows updating of page without refreshing entire page
+
+
+
+- past: XMLHttpRequest Object
+- Now, fetch api
+
+
+<a name="sameoriginpolicy"></a>
+### Same Origin Policy
+NOT single origin policy, but same
+
+SOP, is used to limit ajax to same domain
+
+- like preventing non parents from accessing child, parents, child, same origin
+
+- policy to prevent ajax request cross domains
+- it is a security feature/mechanism
+- origin is defined as uri, hostname, and port number
+
+  so same origin means having same:
+
+  php
+  1. protocol:   http:// vs https://
+  2. hostname/domainname
+  3. port   ex: :80
+
+
+  paths can differ
+
+  ex: http://shama.com and http://shama.com/bobo 
+
+  is allowed
+
+  but http://shama.com and https://shama.com, not because different protocol
+
+
+
+url breakdown:
+https://www.google.com/search?q=what+is+port+in+url&source=lnms&tbm=isch&sa=X&ved=0ahUKEwij94HksYrfAhWLnFkKHQOvBkIQ_AUIECgD&biw=1229&bih=578#imgrc=VCOjkKoo4Ee83M:
+
+
+Two ways to bypass
+
+1. CORS
+2. JSONP
+
+
+https://resources.infosecinstitute.com/bypassing-same-origin-policy-sop/
+
+
+
+
+<a name="cors"></a>
+### CORS - Cross Origin Resource Sharing
+
+CORS is used to relax SOP, allow ajax cross domain
+
+- policy to allow ajax request cross domains
+- like non parents given access to report cards
+
+
+
+<a name="jsonp"></a>
+### JSONP - Javascript Object Notation with Padding
+
+- Was created to bypass CORS policy of AJAX, so no CORS
+- Uses script tag to execute function which passes JSON object
+
+https://stackoverflow.com/questions/3839966/can-anyone-explain-what-jsonp-is-in-layman-terms
+
+
+https://stackoverflow.com/questions/2067472/what-is-jsonp-all-about/2067584#2067584
 
 
