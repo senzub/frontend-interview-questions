@@ -339,6 +339,21 @@ console.log(a[b]);
 
 #### Soln
 
+
+Javascript object keys must be strings or symbosl
+
+
+object[]   backet notation will coerce input to string
+
+
+So object[{key:'b'}]
+ and object[{key:'c'}] both become object["[object Object]"]
+
+
+ and thus, any object keys become same key "[object Object]" due to conversion
+
+
+
 11. In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?
 
 (function() {

@@ -787,6 +787,39 @@ typeof to check
 <a name="object"></a>
 ### Objects
 
+key: value pairs
+
+#### Notation to access key: value
+
+1. Dot notation
+
+
+2. Bracket notation
+
+  obj[]      ->   the []   implicitly coerces all to strings
+   
+   1. get variable value, if var given
+   2. implicitly coerces to string
+
+
+
+  Things to remeber:
+
+  1. So, any object keys, coerced to same "[object Object]"
+
+   ex: var x = {},
+          y = {a:1},
+          z = {b:3};
+
+      x[y] = 5;
+      x[z] =7;
+
+      console.log(x[y]);    ->  7   b/c x[y] and x[z] coerced to same obj
+  2.
+
+
+
+
 
 #### Built-in Objects
 NH
@@ -1570,6 +1603,27 @@ Two ways to bypass
 
 https://resources.infosecinstitute.com/bypassing-same-origin-policy-sop/
 
+
+
+
+
+<a name="vardeclaration"></a>
+### Variable Declaration
+
+
+All equivalent forms
+
+1. var x = 5;
+   var y = 6;
+
+
+2. var x = 5, y = 6;
+
+3. var x = 5,
+       y = 6;
+
+
+       https://stackoverflow.com/questions/694102/declaring-multiple-variables-in-javascript
 
 
 
