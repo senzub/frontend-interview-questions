@@ -1649,3 +1649,44 @@ https://stackoverflow.com/questions/3839966/can-anyone-explain-what-jsonp-is-in-
 https://stackoverflow.com/questions/2067472/what-is-jsonp-all-about/2067584#2067584
 
 
+<a name="ifelse"></a>
+### If Else
+
+#### Brackets
+
+1. No brackets   - if one line statement, but you should always use
+
+if (cond) 
+    alert("Condition met!")
+else
+    alert("Condition not met!")
+
+if (cond) alert("Condition met!")
+else alert("Condition not met!")    
+
+#### Errors:
+
+Can't have else if no bracket, one line
+
+if (cond) 
+    alert("Condition met!")
+    alert("Condition met!")
+
+else
+    alert("Condition not met!")
+
+
+allowed, but no condition 
+
+
+if (cond) 
+    alert("Condition met!")
+    alert("Condition met!")
+
+
+
+
+2. Yes Brackets   - if >one line statement
+
+
+
