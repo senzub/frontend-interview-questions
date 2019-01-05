@@ -787,7 +787,61 @@ function longestString(i) {
 }
 
 
-#### Recursion:
+18. Write a method that takes an integer and returns the smallest number of bills in US currency that could make up that integer value.
+
+The currency denominations will be: 1, 5, 10, 20, 50, and 100.
+
+
+#### Soln
+
+function billNumbers(sum) {
+	if (typeof sum !== "number" || isNaN(sum)) {
+		return "Pleasre provide number";
+	}
+	let bills = {
+		one: 0,
+		five: 0,
+		ten: 0,
+		twenty: 0,
+		fifty: 0,
+		hundred: 0,
+		totalCount: 0
+	}
+	while(sum>0) {
+		if (sum>=100) {
+			sum -= 100;
+			bills.hundred++;
+			bills.totalCount++;
+		} else if(sum<100 && sum>=50) {
+			sum -= 50;
+			bills.fifty++;
+			bills.totalCount++;
+		} else if(sum<50 && sum>=20) {
+			sum -= 20;
+			bills.twenty++;
+			bills.totalCount++;
+		} else if(sum<20 && sum>=10) {
+			sum -= 10;
+			bills.ten++;
+			bills.totalCount++;
+		} else if(sum<10 && sum>=5) {
+			sum -= 5;
+			bills.five++;
+			bills.totalCount++;
+		} else if(sum<5 && sum>=1) {
+			sum -= 1;
+			bills.one++;
+			bills.totalCount++;
+		} 
+	}
+	return bills;
+}
+
+
+
+### Recursion:
+
+https://www.thecodingdelight.com/understanding-recursion-javascript/
 
 
 1. Find sum of arrays, including array of array
@@ -896,6 +950,17 @@ function arraySum(i) {
 #### Soln
 
 
+#### Tips: 
+	1. Base case is [[1]]
+	2. Add 1, 1 to the end and fronts
+	3. All calculations of a new line is the one less than length of previous line
+	 so to create new line, we loop   for (let i = 0; i<prevSeq.length-1)
+	 and add newSeq.push(prevSeq[i] + prevSeq[i+1])
+
+	 This prevents adding too much, such as in 1st line, where only one element, none else to add
+
+
+
 5. Fibonacci Number
 
 Fibonacci number is the number in sequence that is the sum of the previous two numbers
@@ -912,6 +977,11 @@ start from 0 and 1
 
 
 #### Soln
+
+#### Tips: 
+	1. 1st number are 2, [0,1]
+	2. Each number is progressively sum of these two numbers
+
 
 Attempt 1:  problem was that return array.push gives back new length, NOT the array
 
@@ -960,3 +1030,29 @@ function getFibonnaciNum(n) {
 
 
 #### Soln
+
+
+
+
+### Nested For loops
+
+
+
+1. Write a function that when passed an array of numbers it gives you the max difference between the largest and smallest number ONLY if the small number is in front of the large number, not behind it, so for example: [3,4,8,1] = 5, notice how the biggest difference is between 8 and 1, but because the 1 is after the 8 in the array it shouldn't count, so really the biggest gap is the 3 and the 8.
+
+
+#### Soln
+
+function diff(array) {
+	var sortedArray = array.slice().sort((a,b)=>a-b);
+	for (let i = 0; i < sortedArray.length; i++) {
+		for (let j = sortedArray.length-1; j >= 0; j--) {
+			if ((sortedArray[i] < sortedArray[j])
+				&& array.indexOf(sortedArray[i]) < array.indexOf(sortedArray[j])
+				) {
+				return sortedArray[j] - sortedArray[i];
+			} else continue;
+		}
+	}
+	return array[0];
+}
