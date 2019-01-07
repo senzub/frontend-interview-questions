@@ -387,7 +387,56 @@ diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
 
 6. Pig Latin
 
+rules here: https://www.freecodecamp.org/forum/t/pig-latin-words-without-vowels/230950
+
+Translate the provided string to pig latin.
+
+Pig Latin takes the first consonant (or consonant cluster) of an English word, moves it to the end of the word and suffixes an "ay".
+
+If a word begins with a vowel you just add "way" to the end.
+
+Input strings are guaranteed to be English words in all lowercase.
+
+   1. if start with vowel, add "way"
+   2. if no vowels at all, we add "ay"
+   3. if not start with vowel but have, we cut off str until vowel, and add to end with "ay"
+
+	translatePigLatin("california") should return "aliforniacay".
+	translatePigLatin("paragraphs") should return "aragraphspay".
+	translatePigLatin("glove") should return "oveglay".
+	translatePigLatin("algorithm") should return "algorithmway".
+	translatePigLatin("eight") should return "eightway".
+	Should handle words where the first vowel comes in the end of the word.
+	Should handle words without vowels.
+
+
 #### Soln
+
+
+  function translatePigLatin(str) {
+  let vowels = ["a","e","i","o","u"];
+
+  let noVowelCheck = [].every.call(str,(ele) => {
+    return !vowels.includes(ele);
+  })
+  if (noVowelCheck) {
+    return str.slice() + "ay";
+  }
+
+  if (!vowels.includes(str.charAt(0))) {
+    for (let i = 0; i < str.length; i++) {
+      if (vowels.includes(str.charAt(i))) {
+        let index = i;
+        return str.slice(i) + str.slice(0,i) + 'ay';
+      }
+    }
+  } else if (vowels.includes(str.charAt(0))) {
+    return str.slice(0) + "way";
+  }
+}
+
+translatePigLatin("consonant");
+
 
 7. Search and Replace
 
