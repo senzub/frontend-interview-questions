@@ -526,7 +526,16 @@ function minSubArrayLen(nums, sum) {
 
 
 
-3. findLongestSubstring - 
+3. findLongestSubstring - write a function called findLongestSubstring which accepts a string and returns the length of the longest substring with all distinct characters
+
+findLongestSubstring('')   // 0
+findLongestSubstring("rithmschool")   // 7
+findLongestSubstring("thisisawesome")   // 6
+findLongestSubstring("thecatinthehat")   // 7
+findLongestSubstring('bbbbbb')   // 1
+findLongestSubstring('longestsubstring')   // 8
+findLongestSubstring('thisishowwedoit')   // 6
+
 
 #### my soln
 
@@ -601,3 +610,280 @@ Binary Search is divide and conquer algorithm, must be sorted
      2. check if midpoint is < > search int
      3. if greater, we look at bottom
      4. if smaller, look at top
+
+
+///////////////////////////////////////
+
+## Recursion - 
+
+///////////////////////////////////////
+
+1. countdown
+
+function countDown(n) {
+	if (n<=0) {
+		console.log("all done!");
+		return;
+	}
+	console.log(n);
+	countDown(n-1);
+}
+
+countDown(5);
+
+2. sumRange
+
+function sumRange(num) {
+	if (num === 1) return 1;
+	return num + sumRange(num-1);
+}
+
+
+3. factorial
+
+function factorial(num) {
+	if (num < 1) return "Enter positive int";
+	if (num === 1) return 1;
+	return num * factorial(num-1);
+}
+factorial(5);
+
+
+4. collectOddValues
+
+function collectOddValues(arr) {
+	let result = [];
+	function helper(input) {
+		if (input.length <= 0) return;
+		if (input[0]%2 === 1) result.push(input[0]);
+		helper(input.slice(1));
+	}	
+	helper(arr);
+	return result;
+}
+
+collectOddValues([1,2,3,4,5]);
+
+5. collectOddValues - without helper function/pure recursion
+
+function collectOddValues(arr) {
+	let newArr = [];
+	if (arr.length === 0) {
+		return newArr;
+	}
+	if (arr[0]%2 !== 0) {
+		newArr.push(arr[0]);
+	}
+	newArr = newArr.concat(collectOddValues(arr.slice(1)));
+	return newArr;
+}
+
+collectOddValues([1,2,3,4,5]);
+
+
+### Recursion Set 1
+
+6. power 
+
+function power(base,exp){
+    if (exp === 0) return 1;
+    if (exp < 1) return base;
+    return base* power(base,exp-1);
+}
+
+// power(2,0) // 1
+// power(2,2) // 4
+// power(2,4) // 16
+
+
+7. factorial
+
+function factorial(n) {
+	if (n<=1) return 1;
+	return n * factorial(n-1);
+}
+
+
+//factorial(1) // 1
+// factorial(2) // 2
+// factorial(4) // 24
+// factorial(7) // 5040
+
+
+
+8. productOfArray
+
+function productOfArray(arr) {
+    if (arr.length === 0) {
+        return 1;
+    }
+    return arr[0] * productOfArray(arr.slice(1));
+}
+
+
+// productOfArray([1,2,3]) // 6
+// productOfArray([1,2,3,10]) // 60
+
+
+
+9. recursiveRange
+
+
+function recursiveRange(n){
+   if (n === 1) return 1;
+   return recursiveRange(n-1) + n;
+}
+
+
+// SAMPLE INPUT/OUTPUT
+// recursiveRange(6) // 21
+// recursiveRange(10) // 55 
+
+
+10. fib
+
+function fib(num){
+  let seq;
+  function recur(n) {
+      if (n === 1) return [1,1];
+      let newSeq = recur(n-1);
+      newSeq.push(
+          newSeq[newSeq.length -1] + newSeq[newSeq.length-2]
+          );
+      return newSeq;
+  } 
+  return recur(num)[num-1];
+  
+}
+
+// fib(4) // 3
+// fib(10) // 55
+// fib(28) // 317811
+// fib(35) // 9227465
+
+
+
+### Recursion Set 2 (Advanced)
+
+11. reverse - write a recursive function called reverse which accepts a string and returns a new string in reverse
+
+
+#### my soln
+
+function reverse(str) {
+	if (str.length === 0) return "";
+	return reverse(str.slice(1)) + str.charAt(0);
+}
+
+reverse("abc");
+
+// reverse('awesome') // 'emosewa'
+// reverse('rithmschool') // 'loohcsmhtir'
+
+
+#### CS's soln
+
+12. isPalindrome - write a recursive function called isPalindrome which returns true if the string passed to it is a palindrome. Otherwise return false;
+
+
+#### my soln
+
+function isPalindrome(str){
+    function reverse(str) {
+    	if (str.length === 0) return "";
+    	return reverse(str.slice(1)) + str.charAt(0);
+    }  
+    let strRev = reverse(str);
+    return strRev === str;
+}
+
+// isPalindrome('awesome') // false
+// isPalindrome('foobar') // false
+// isPalindrome('tacocat') // true
+// isPalindrome('amanaplanacanalpanama') // true
+// isPalindrome('amanaplanacanalpandemonium') // false
+
+
+
+#### CS's soln
+
+13. someRecursive - write a function called someRecursive which accepts an array and a callback. The function returns true if a single value in the array returns true when passed to the callback. Otherwise it returns true
+
+
+#### my soln
+
+
+// SAMPLE INPUT / OUTPUT
+// const isOdd = val => val % 2 !== 0;
+
+// someRecursive([1,2,3,4], isOdd) // true
+// someRecursive([4,6,8,9], isOdd) // true
+// someRecursive([4,6,8], isOdd) // false
+// someRecursive([4,6,8], val => val > 10); // false
+
+
+
+#### CS's soln
+
+14. flatten - write a recursive function which accepts an array of arrays and returns a new array with all values flattened
+
+#### my soln
+
+function flatten(arr){
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] == "object" && arr[i].constructor == Array) {
+          newArr = newArr.concat(flatten(arr[i]));
+      } else {
+          newArr.push(arr[i]);
+      }
+  } 
+  return newArr;
+}
+
+
+// flatten([1, 2, 3, [4, 5] ]) // [1, 2, 3, 4, 5]
+// flatten([1, [2, [3, 4], [[5]]]]) // [1, 2, 3, 4, 5]
+// flatten([[1],[2],[3]]) // [1,2,3]
+// flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]) // [1,2,3
+
+
+#### CS's soln
+
+15. Deep clone an object - this means to make a copy of all the objects wihin objects, instead of sharing a reference to the object
+
+#### my soln
+
+
+16.
+
+#### my soln
+
+#### CS's soln
+
+17.
+
+#### my soln
+
+#### CS's soln
+18.
+#### my soln
+
+#### CS's soln
+19.
+#### my soln
+
+#### CS's soln
+20.
+#### my soln
+
+#### CS's soln
+21.
+#### my soln
+
+#### CS's soln
+22.
+#### my soln
+
+#### CS's soln
+
