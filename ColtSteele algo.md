@@ -762,8 +762,11 @@ function fib(num){
 // fib(35) // 9227465
 
 
-
+//////////////////////////////
 ### Recursion Set 2 (Advanced)
+//////////////////////////////
+
+
 
 11. reverse - write a recursive function called reverse which accepts a string and returns a new string in reverse
 
@@ -782,6 +785,13 @@ reverse("abc");
 
 
 #### CS's soln
+
+function reverse(str){
+	if(str.length <= 1) return str;
+	return reverse(str.slice(1)) + str[0];
+}
+
+
 
 12. isPalindrome - write a recursive function called isPalindrome which returns true if the string passed to it is a palindrome. Otherwise return false;
 
@@ -807,10 +817,25 @@ function isPalindrome(str){
 
 #### CS's soln
 
+function isPalindrome(str){
+    if(str.length === 1) return true;
+    if(str.length === 2) return str[0] === str[1];
+    if(str[0] === str.slice(-1)) return isPalindrome(str.slice(1,-1))
+    return false;
+}
+
+
+
 13. someRecursive - write a function called someRecursive which accepts an array and a callback. The function returns true if a single value in the array returns true when passed to the callback. Otherwise it returns true
 
 
 #### my soln
+
+function someRecursive(arr,f){
+  if (arr.length === 0) return false;
+  if (f(arr[0])) return true;
+  return someRecursive(arr.slice(1),f);
+}
 
 
 // SAMPLE INPUT / OUTPUT
@@ -824,6 +849,13 @@ function isPalindrome(str){
 
 
 #### CS's soln
+
+function someRecursive(array, callback) {
+    if (array.length === 0) return false;
+    if (callback(array[0])) return true;
+    return someRecursive(array.slice(1),callback);
+}
+
 
 14. flatten - write a recursive function which accepts an array of arrays and returns a new array with all values flattened
 
@@ -850,39 +882,271 @@ function flatten(arr){
 
 #### CS's soln
 
+function flatten(oldArr){
+  var newArr = []
+  	for(var i = 0; i < oldArr.length; i++){
+    	if(Array.isArray(oldArr[i])){
+      		newArr = newArr.concat(flatten(oldArr[i]))
+    	} else {
+      		newArr.push(oldArr[i])
+    	}
+  } 
+  return newArr;
+}
+
+
+
+
 15. Deep clone an object - this means to make a copy of all the objects wihin objects, instead of sharing a reference to the object
 
 #### my soln
 
 
-16.
+16. capitalizeFirst - write a recursive function called capitalizeFirst. Given an array of strings, capitalize the first letter of each string in the array
+
+
+// capitalizeFirst(['car','taco','banana']); // ['Car','Taco','Banana']
+
 
 #### my soln
 
+function capitalizeFirst (arr) {
+    let list = [];
+    function helper(strings) {
+        if (strings.length === 0) return;
+        let string = strings[0];
+        list.push(
+            string.charAt(0).toUpperCase() + string.slice(1)
+        );
+        return helper(strings.slice(1));
+    }
+    helper(arr);
+    return list;
+}
+
+// capitalizeFirst(['car','taco','banana']); // ['Car','Taco','Banana']
+
+
+
+
 #### CS's soln
 
-17.
+function capitalizeFirst (array) {
+  if (array.length === 1) {
+    return [array[0][0].toUpperCase() + array[0].substr(1)];
+  }
+  const res = capitalizeFirst(array.slice(0, -1));
+  const string = array.slice(array.length - 1)[0][0].toUpperCase() + array.slice(array.length-1)[0].substr(1);
+  res.push(string);
+  return res;
+}
+
+
+17. nestedEvenSum - write a recursive function called nestedEvenSum. Return the sum of all even numbers in an object which may contain nested objects
+
 
 #### my soln
 
-#### CS's soln
-18.
-#### my soln
+function nestedEvenSum (obj) {
+    let sum = 0;
+    function helper(object) {
+        for (let key in object) {
+            if (typeof object[key] === "object"
+                && object[key].constructor === Object
+            ) {
+                helper(object[key]);
+            }
+            else if (typeof object[key] == "number"
+                && object[key]%2 === 0
+            ) {
+                sum += object[key];
+            }
+        }
+        return;
+    }
+    helper(obj);
+    return sum;
+}
+
+
+var obj1 = {
+  outer: 2,
+  obj: {
+    inner: 2,
+    otherObj: {
+      superInner: 2,
+      notANumber: true,
+      alsoNotANumber: "yup"
+    }
+  }
+}
+
+var obj2 = {
+  a: 2,
+  b: {b: 2, bb: {b: 3, bb: {b: 2}}},
+  c: {c: {c: 2}, cc: 'ball', ccc: 5},
+  d: 1,
+  e: {e: {e: 2}, ee: 'car'}
+};
+
+nestedEvenSum(obj1); // 6
+nestedEvenSum(obj2); // 10
+
 
 #### CS's soln
-19.
+
+function nestedEvenSum (obj, sum=0) {
+    for (var key in obj) {
+        if (typeof obj[key] === 'object'){
+            sum += nestedEvenSum(obj[key]);
+        } else if (typeof obj[key] === 'number' && obj[key] % 2 === 0){
+            sum += obj[key];
+        }
+    }
+    return sum;
+}
+
+
+
+
+18. capitalizeWords - write a recursive function, that, given an array of words, return a new array containing each word capitalized.
+
+
 #### my soln
 
-#### CS's soln
-20.
-#### my soln
+function capitalizeWords (arr) {
+  let list = [];
+  function helper(words) {
+      if (words.length === 0) return;
+      list.push(words[0].toUpperCase());
+      helper(words.slice(1));
+      return;
+  }
+  helper(arr);
+  return list;
+}
+
+// let words = ['i', 'am', 'learning', 'recursion'];
+// capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
 
 #### CS's soln
+
+function capitalizeWords (array) {
+  if (array.length === 1) {
+    return [array[0].toUpperCase()];
+  }
+  let res = capitalizeWords(array.slice(0, -1));
+  res.push(array.slice(array.length-1)[0].toUpperCase());
+  return res;
+ 
+}
+
+
+
+19. stringifyNumbers - write a function called stringifyNumbers whicch takes in an object and finds all of the values which are numbers and converts them to strings. Recursion would be a great way to solve this!
+
+#### my soln
+// wrong because modifies object, we want copy
+
+function stringifyNumbers(obj) {
+    for (let key in obj) {
+        if (typeof obj[key] === "object" && obj[key].constructor === Object) {
+            obj[key] = stringifyNumbers(obj[key]);
+        } else if (typeof obj[key] === "number") {
+            obj[key] = String(obj[key]);
+        }
+    }   
+    return obj;
+}
+
+
+//nonmodifying
+
+function stringifyNumbers(obj) {
+    let newObj = {};
+    for (let key in obj) {
+        if (typeof obj[key] === "object" && obj[key].constructor === Object) {
+            newObj[key] = stringifyNumbers(obj[key]);
+        } else if (typeof obj[key] === "number") {
+            newObj[key] = String(obj[key]);
+        } else {
+            newObj[key] = obj[key];
+        }
+    }
+    return newObj;
+}
+
+
+
+
+#### CS's soln
+
+function stringifyNumbers(obj) {
+  var newObj = {};
+  for (var key in obj) {
+    if (typeof obj[key] === 'number') {
+      newObj[key] = obj[key].toString();
+    } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+      newObj[key] = stringifyNumbers(obj[key]);
+    } else {
+      newObj[key] = obj[key];
+    }
+  }
+  return newObj;
+}
+
+20. collectStrings - write a function called collectStrings which accepts an object and returns an array of all the values in the object that have a typeof string
+
+#### my soln
+
+
+
+#### CS's soln - helper
+
+function collectStrings(obj) {
+    var stringsArr = [];
+    function gatherStrings(o) {
+        for(var key in o) {
+            if(typeof o[key] === 'string') {
+                stringsArr.push(o[key]);
+            }
+            else if(typeof o[key] === 'object') {
+                return gatherStrings(o[key]);
+            }
+        }
+    }
+    gatherStrings(obj);
+    return stringsArr;
+}
+
+#### CS's soln - pure
+
+function collectStrings(obj) {
+    var stringsArr = [];
+    for(var key in obj) {
+        if(typeof obj[key] === 'string') {
+            stringsArr.push(obj[key]);
+        }
+        else if(typeof obj[key] === 'object') {
+            stringsArr = stringsArr.concat(collectStrings(obj[key]));
+        }
+    }
+    return stringsArr;
+}
+
+
+
 21.
+
 #### my soln
 
 #### CS's soln
+
+
+
 22.
+
 #### my soln
 
 #### CS's soln
