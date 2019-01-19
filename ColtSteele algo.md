@@ -657,6 +657,7 @@ function collectOddValues(arr) {
 		if (input.length <= 0) return;
 		if (input[0]%2 === 1) result.push(input[0]);
 		helper(input.slice(1));
+		return;
 	}	
 	helper(arr);
 	return result;
@@ -763,7 +764,7 @@ function fib(num){
 
 
 //////////////////////////////
-### Recursion Set 2 (Advanced)
+### Recursion Advanced
 //////////////////////////////
 
 
@@ -900,6 +901,42 @@ function flatten(oldArr){
 15. Deep clone an object - this means to make a copy of all the objects wihin objects, instead of sharing a reference to the object
 
 #### my soln
+
+   **separate for arr and obj**
+
+function cloneObject(obj) {
+    var newObj = {};
+    for (let key in obj) {
+        let value = obj[key];
+        if (typeof value === 'object' && value.constructor == Object) {
+            newObj[key] = cloneObject(value);
+        } else {
+            newObj[key] = value;
+        }
+    }
+    return newObj;
+}
+
+function cloneArray(arr) {
+    var newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === 'object' && arr[i].constructor == Array) {
+            newArr.push(cloneArray(arr[i]));
+        } else {
+            newArr.push(arr[i]);
+        }
+    }
+    return newArr;
+}
+
+
+
+   **for both arr AND obj**
+https://www.codementor.io/avijitgupta/deep-copying-in-js-7x6q8vh5d
+
+
+
+
 
 
 16. capitalizeFirst - write a recursive function called capitalizeFirst. Given an array of strings, capitalize the first letter of each string in the array
@@ -1100,6 +1137,24 @@ function stringifyNumbers(obj) {
 
 #### my soln
 
+function collectStrings (obj) {
+    let list = [];
+    function helper(object) {
+        for (let key in object) {
+            if (typeof object[key] === "object"
+                && object[key].constructor === Object
+            ) {
+                helper(object[key]);
+            }
+            else if (typeof object[key] == "string") {
+                list.push(object[key]);
+            }
+        }
+        return;
+    }
+    helper(obj);
+    return list;
+}
 
 
 #### CS's soln - helper
